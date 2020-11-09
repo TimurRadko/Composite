@@ -2,7 +2,7 @@ package com.epam.information.handling.logic.expression;
 
 import com.epam.information.handling.logic.Context;
 
-public class NonTerminalExpressionNumber extends AbstractMathExpression {
+public class NonTerminalExpressionNumber implements MathExpression {
     private final int value;
 
     public NonTerminalExpressionNumber(int value) {

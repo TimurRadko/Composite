@@ -10,16 +10,16 @@ public class Calculator {
 
     public int calculate(String expression) {
         String preparedExpression = prepareStringValue(expression);
-        List<AbstractMathExpression> mathExpressions = parse(preparedExpression);
+        List<MathExpression> mathExpressions = parse(preparedExpression);
         Context context = new Context();
-        for (AbstractMathExpression terminal : mathExpressions) {
+        for (MathExpression terminal : mathExpressions) {
             terminal.interpret(context);
         }
         return context.popValue();
     }
 
-    private List<AbstractMathExpression> parse(String expression) {
-        List<AbstractMathExpression> mathExpressions = new ArrayList<>();
+    private List<MathExpression> parse(String expression) {
+        List<MathExpression> mathExpressions = new ArrayList<>();
         String[] expressions = expression.split("_");
         for (String lexeme : expressions) {
             if (lexeme.isEmpty()) {
@@ -28,27 +28,22 @@ public class Calculator {
             char temp = lexeme.charAt(0);
             switch (temp) {
                 case '+':
-                    TerminalExpressionPlus plus = new TerminalExpressionPlus();
-                    mathExpressions.add(plus);
+                    mathExpressions.add(new TerminalExpressionPlus());
                     break;
                 case '-':
-                    TerminalExpressionMinus minus = new TerminalExpressionMinus();
-                    mathExpressions.add(minus);
+                    mathExpressions.add(new TerminalExpressionMinus());
                     break;
                 case '*':
-                    TerminalExpressionMultiply multiply = new TerminalExpressionMultiply();
-                    mathExpressions.add(multiply);
+                    mathExpressions.add(new TerminalExpressionMultiply());
                     break;
                 case '/':
-                    TerminalExpressionDivide divide = new TerminalExpressionDivide();
-                    mathExpressions.add(divide);
+                    mathExpressions.add(new TerminalExpressionDivide());
                     break;
                 default:
                     Scanner scanner = new Scanner(lexeme);
                     if (scanner.hasNextInt()) {
                         int number = scanner.nextInt();
-                        NonTerminalExpressionNumber nonTerminalExpression = new NonTerminalExpressionNumber(number);
-                        mathExpressions.add(nonTerminalExpression);
+                        mathExpressions.add(new NonTerminalExpressionNumber(number));
                     }
             }
         }

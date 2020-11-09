@@ -2,7 +2,7 @@ package com.epam.information.handling.logic.expression;
 
 import com.epam.information.handling.logic.Context;
 
-public class TerminalExpressionMinus extends AbstractMathExpression {
+public class TerminalExpressionMinus implements MathExpression {
 
     @Override
     public void interpret(Context context) {

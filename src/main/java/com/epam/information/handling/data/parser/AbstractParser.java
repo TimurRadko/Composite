@@ -21,10 +21,14 @@ public abstract class AbstractParser implements Parser {
         List<Component> children = new ArrayList<>();
         while (matcher.find()) {
             String value = matcher.group();
-            Component child = successor.parse(value);
-            children.add(child);
+            addChild(children, value);
         }
         return new Composite(children);
+    }
+
+    protected void addChild(List<Component> children, String value) {
+        Component child = successor.parse(value);
+        children.add(child);
     }
 
     protected abstract Pattern getPattern();

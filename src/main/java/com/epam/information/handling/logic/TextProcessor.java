@@ -39,17 +39,18 @@ public class TextProcessor {
         return Leaf.createWord("[" + stringResult + "] ");
     }
 
-    public String restoreText(Component component) {
-        List<Component> children = component.getChildren();
-        StringBuilder builder = new StringBuilder();
-        if (children.size() > 0) {
-            for (Component child : children) {
-                builder.append(restoreParagraph(child)).append(PARAGRAPH_SEPARATOR);
+    public String restoreText(Component root) {
+        StringBuilder text = new StringBuilder();
+        for (Component paragraph : root.getChildren()) {
+            for (Component sentence : paragraph.getChildren()) {
+                for (Component lexeme : sentence.getChildren()) {
+                    String lexemeValue = ((Leaf) lexeme).getValue();
+                    text.append(lexemeValue);
+                }
             }
-        } else {
-            restoreParagraph(component);
+            text.append(PARAGRAPH_SEPARATOR);
         }
-        return prepareText(builder);
+        return prepareText(text);
     }
 
     private String prepareText(StringBuilder builder) {
@@ -58,33 +59,12 @@ public class TextProcessor {
         return rawText.substring(0, length - 2);
     }
 
-    private String restoreParagraph(Component component) {
-        List<Component> children = component.getChildren();
-        StringBuilder builder = new StringBuilder();
-        if (children.size() > 0) {
-            for (Component child : children) {
-                builder.append(restoreSentence(child));
-            }
-        } else {
-            restoreSentence(component);
-        }
-        return builder.toString();
-    }
-
-    private String restoreSentence(Component component) {
-        List<Component> children = component.getChildren();
-        StringBuilder builder = new StringBuilder();
-        for (Component child : children) {
-            Leaf leaf = (Leaf) child;
-            String leafValue = leaf.getValue();
-            builder.append(leafValue);
-        }
-        return builder.toString();
-    }
-
     public Component sortParagraphsBySentenceLength(Component text) {
         List<Component> paragraphs = text.getChildren();
-        paragraphs.sort(Comparator.comparingInt(paragraph -> paragraph.getChildren().size()));
+        paragraphs.sort(Comparator.comparingInt(paragraph -> {
+            List<Component> children = paragraph.getChildren();
+            return children.size();
+        }));
         return new Composite(paragraphs);
     }
 
@@ -94,12 +74,16 @@ public class TextProcessor {
             List<Component> sentences = paragraph.getChildren();
             for (Component sentence : sentences) {
                 List<Component> lexemes = sentence.getChildren();
-                lexemes.sort(Comparator.comparingInt(lexeme -> {
-                    String lexemeValue = ((Leaf) lexeme).getValue();
-                    return lexemeValue.length();
-                }));
+                sort(lexemes);
             }
         }
         return new Composite(paragraphs);
+    }
+
+    private void sort(List<Component> lexemes) {
+        lexemes.sort(Comparator.comparingInt(lexeme -> {
+            String lexemeValue = ((Leaf) lexeme).getValue();
+            return lexemeValue.length();
+        }));
     }
 }
