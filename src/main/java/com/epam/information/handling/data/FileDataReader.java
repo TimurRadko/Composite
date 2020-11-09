@@ -3,6 +3,7 @@ package com.epam.information.handling.data;
 import com.epam.information.handling.exception.DataException;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,14 +13,13 @@ public class FileDataReader {
 
     public String read(String filename) throws DataException {
         Path path = Paths.get(filename);
-        String text;
+        StringBuilder resultBuilder = new StringBuilder();
         try {
-            List<String> lines = Files.readAllLines(path);
-            String lineSeparator = System.lineSeparator();
-            text = String.join(lineSeparator, lines);
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            lines.forEach(line -> resultBuilder.append(line).append('\n'));
         } catch (IOException e) {
             throw new DataException("File not found.");
         }
-        return text;
+        return resultBuilder.toString();
     }
 }

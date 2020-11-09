@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component {
-    private final List<Component> components = new ArrayList<>();
+    private final List<Component> components;
 
-    @Override
-    public void add(Component component) {
-        components.add(component);
+    public Composite(List<Component> components) {
+        this.components = components;
     }
 
     @Override
-    public List<Component> getComponents() {
-        return components;
+    public List<Component> getChildren() {
+        return new ArrayList<>(components);
     }
 
     @Override
@@ -37,14 +36,8 @@ public class Composite implements Component {
 
     @Override
     public String toString() {
-        return prepareToString();
-    }
-
-    private String prepareToString() {
-        StringBuilder builder = new StringBuilder();
-        for (Component component : components) {
-            builder.append(component).append(" ");
-        }
-        return builder.toString();
+        return "Composite{" +
+                "components=" + components +
+                '}';
     }
 }

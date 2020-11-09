@@ -1,11 +1,6 @@
 package com.epam.information.handling.logic;
 
-import com.epam.information.handling.logic.expression.AbstractMathExpression;
-import com.epam.information.handling.logic.expression.NonTerminalExpressionNumber;
-import com.epam.information.handling.logic.expression.terminal.TerminalExpressionDivide;
-import com.epam.information.handling.logic.expression.terminal.TerminalExpressionMinus;
-import com.epam.information.handling.logic.expression.terminal.TerminalExpressionMultiply;
-import com.epam.information.handling.logic.expression.terminal.TerminalExpressionPlus;
+import com.epam.information.handling.logic.expression.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +9,8 @@ import java.util.Scanner;
 public class Calculator {
 
     public int calculate(String expression) {
-        List<AbstractMathExpression> mathExpressions = parse(expression);
+        String preparedExpression = prepareStringValue(expression);
+        List<AbstractMathExpression> mathExpressions = parse(preparedExpression);
         Context context = new Context();
         for (AbstractMathExpression terminal : mathExpressions) {
             terminal.interpret(context);
@@ -24,7 +20,7 @@ public class Calculator {
 
     private List<AbstractMathExpression> parse(String expression) {
         List<AbstractMathExpression> mathExpressions = new ArrayList<>();
-        String[] expressions = expression.split("\\p{Blank}+");
+        String[] expressions = expression.split("_");
         for (String lexeme : expressions) {
             if (lexeme.isEmpty()) {
                 continue;
@@ -57,6 +53,11 @@ public class Calculator {
             }
         }
         return mathExpressions;
+    }
+
+    private String prepareStringValue(String expression) {
+        int length = expression.length();
+        return expression.substring(1, length - 2);
     }
 }
 

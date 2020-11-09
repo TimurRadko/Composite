@@ -8,7 +8,7 @@ import org.junit.Test;
 public class FileDataReaderTest {
     private static final String VALID_FILE_PATH = "src/test/resources/test-text.txt";
     private static final String INVALID_FILE_PATH = "src/test/resources/invalid.txt";
-    private static final String EXPECTED_TEXT = "Hello world!\r\nFrom tests!";
+    private static final String EXPECTED_TEXT = "Hello world!\nFrom tests!\n";
 
     @Test
     public void testReadShouldCorrectReadTextFromFileWhenFileExists() throws DataException {

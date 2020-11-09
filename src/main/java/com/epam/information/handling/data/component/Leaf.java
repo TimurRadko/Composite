@@ -30,12 +30,7 @@ public class Leaf implements Component {
     }
 
     @Override
-    public void add(Component component) {
-
-    }
-
-    @Override
-    public List<Component> getComponents() {
+    public List<Component> getChildren() {
         return new ArrayList<>();
     }
 
