@@ -6,7 +6,6 @@ import com.epam.information.handling.data.component.Leaf;
 import java.util.List;
 import java.util.regex.Pattern;
 
-
 public class SentenceParser extends AbstractParser {
     private static final String WORD = "(\\p{Graph}+ )|(\\p{Alnum}+[.!?])";
     private static final String EXPRESSION = "\\[.+?] ";

@@ -69,18 +69,20 @@ public class TextProcessor {
     }
 
     public Component sortWordsInAllSentences(Component text) {
-        List<Component> paragraphs = text.getChildren();
-        for (Component paragraph : paragraphs) {
-            List<Component> sentences = paragraph.getChildren();
-            for (Component sentence : sentences) {
+        List<Component> paragraphs = new ArrayList<>();
+        for (Component paragraph : text.getChildren()) {
+            List<Component> sentences = new ArrayList<>();
+            for (Component sentence : paragraph.getChildren()) {
                 List<Component> lexemes = sentence.getChildren();
-                sort(lexemes);
+                sortLexemes(lexemes);
+                sentences.add(new Composite(lexemes));
             }
+            paragraphs.add(new Composite(sentences));
         }
         return new Composite(paragraphs);
     }
 
-    private void sort(List<Component> lexemes) {
+    private void sortLexemes(List<Component> lexemes) {
         lexemes.sort(Comparator.comparingInt(lexeme -> {
             String lexemeValue = ((Leaf) lexeme).getValue();
             return lexemeValue.length();
