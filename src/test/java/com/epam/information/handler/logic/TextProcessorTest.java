@@ -14,13 +14,13 @@ public class TextProcessorTest {
     private static final Leaf THIRD_LEAF = Leaf.createWord("Hello! ");
     private static final Leaf SECOND_LEAF = Leaf.createWord("[8]. ");
     private static final Component EXPECTED_COMPONENT = new Composite(Collections.singletonList(THIRD_LEAF));
-    private static final Component LEAF = Leaf.createExpression("[5_3_+] ");
-    private static final Component EXPECTED_EXPRESSION_LEAF = Leaf.createWord("[8] ");
+    private static final Component LEAF = Leaf.createExpression("5_3_+");
+    private static final Component EXPECTED_EXPRESSION_LEAF = Leaf.createWord("8 ");
     private static final Component SENTENCE_COMPONENT = new Composite(Arrays.asList(THIRD_LEAF, SECOND_LEAF));
     private static final Component PARAGRAPH_COMPONENT = new Composite(Arrays.asList(SENTENCE_COMPONENT, SENTENCE_COMPONENT));
     private static final Component EXPECTED_TEXT = new Composite(Arrays.asList(PARAGRAPH_COMPONENT, PARAGRAPH_COMPONENT));
 
-    private static final String EXPECTED_TEXT_STRING = "Hello! [8]. Hello! [8]. \r\nHello! [8]. Hello! [8]. ";
+    private static final String EXPECTED_TEXT_STRING = "Hello! [8]. Hello! [8]. \r\nHello! [8]. Hello! [8].";
 
     private static final Component FIRST_PARAGRAPH_COMPONENT_FOR_SORTING =
             new Composite(Arrays.asList(SENTENCE_COMPONENT, SENTENCE_COMPONENT));

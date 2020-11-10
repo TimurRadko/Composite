@@ -5,10 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CalculatorTest {
-    private static final String MULTIPLY = "[2_5_*] ";
-    private static final String PLUS = "[2_5_+] ";
-    private static final String MINUS = "[10_5_-] ";
-    private static final String DIVIDE = "[10_5_/] ";
+    private static final String MULTIPLY = "2_5_* ";
+    private static final String PLUS = "2_5_+ ";
+    private static final String MINUS = "10_5_- ";
+    private static final String DIVIDE = "10_5_/ ";
 
     @Test
     public void testCalculateShouldReturnCorrectAnswerWhenUsingMultiply() {

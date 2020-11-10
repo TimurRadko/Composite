@@ -60,6 +60,9 @@ public class Leaf implements Component {
 
     @Override
     public String toString() {
-        return value;
+        return "Leaf{" +
+                "leafType=" + leafType +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

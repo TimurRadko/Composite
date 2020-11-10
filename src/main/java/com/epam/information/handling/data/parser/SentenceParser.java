@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
     private static final String WORD = "(\\p{Graph}+ )|(\\p{Alnum}+[.!?])";
-    private static final String EXPRESSION = "\\[.+?] ";
+    private static final String EXPRESSION = "(\\d.+?[_+*/-])+ ";
 
     public SentenceParser(Parser successor) {
         super(successor);

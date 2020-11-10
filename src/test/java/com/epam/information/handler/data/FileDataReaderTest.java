@@ -1,6 +1,7 @@
 package com.epam.information.handler.data;
 
-import com.epam.information.handling.data.FileDataReader;
+import com.epam.information.handling.data.reader.DataReader;
+import com.epam.information.handling.data.reader.FileDataReader;
 import com.epam.information.handling.exception.DataException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,14 +13,14 @@ public class FileDataReaderTest {
 
     @Test
     public void testReadShouldCorrectReadTextFromFileWhenFileExists() throws DataException {
-        FileDataReader fileDataReader = new FileDataReader();
+        DataReader fileDataReader = new FileDataReader();
         String actualText = fileDataReader.read(VALID_FILE_PATH);
         Assert.assertEquals(EXPECTED_TEXT, actualText);
     }
 
     @Test(expected = DataException.class)
     public void testReadShouldThrowDataExceptionWhenFileNotExists() throws DataException {
-        FileDataReader fileDataReader = new FileDataReader();
+        DataReader fileDataReader = new FileDataReader();
         fileDataReader.read(INVALID_FILE_PATH);
     }
 }

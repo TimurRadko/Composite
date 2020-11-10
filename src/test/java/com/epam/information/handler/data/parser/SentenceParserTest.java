@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class SentenceParserTest {
-    private static final String VALID_TEXT = "The maths is [5_3_+] good.";
+    private static final String VALID_TEXT = "The maths is 5_3_+ good.";
     private static final Component EXPECTED_LEAF = Leaf.createWord("The ");
 
     @Test

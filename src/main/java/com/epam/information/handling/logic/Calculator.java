@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Calculator {
 
     public int calculate(String expression) {
-        String preparedExpression = prepareStringValue(expression);
+        String preparedExpression = expression.trim();
         List<MathExpression> mathExpressions = parse(preparedExpression);
         Context context = new Context();
         for (MathExpression terminal : mathExpressions) {
@@ -48,11 +48,6 @@ public class Calculator {
             }
         }
         return mathExpressions;
-    }
-
-    private String prepareStringValue(String expression) {
-        int length = expression.length();
-        return expression.substring(1, length - 2);
     }
 }
 

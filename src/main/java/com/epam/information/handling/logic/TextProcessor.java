@@ -11,6 +11,7 @@ import java.util.List;
 
 public class TextProcessor {
     private static final String PARAGRAPH_SEPARATOR = System.lineSeparator();
+    private static final String EXPRESSION_SEPARATOR = " ";
 
     public Component calculateMathExpression(Component component) {
         List<Component> children = component.getChildren();
@@ -36,7 +37,7 @@ public class TextProcessor {
         Calculator calculator = new Calculator();
         int result = calculator.calculate(value);
         String stringResult = Integer.toString(result);
-        return Leaf.createWord("[" + stringResult + "] ");
+        return Leaf.createWord(stringResult + EXPRESSION_SEPARATOR);
     }
 
     public String restoreText(Component root) {
@@ -50,22 +51,15 @@ public class TextProcessor {
             }
             text.append(PARAGRAPH_SEPARATOR);
         }
-        return prepareText(text);
-    }
-
-    private String prepareText(StringBuilder builder) {
-        String rawText = builder.toString();
-        int length = rawText.length();
-        return rawText.substring(0, length - 2);
+        return text.toString().trim();
     }
 
     public Component sortParagraphsBySentenceLength(Component text) {
-        List<Component> paragraphs = text.getChildren();
-        paragraphs.sort(Comparator.comparingInt(paragraph -> {
-            List<Component> children = paragraph.getChildren();
-            return children.size();
-        }));
-        return new Composite(paragraphs);
+        List<Component> sortedParagraphs = new ArrayList<>(text.getChildren());
+        Comparator<Component> comparator =
+                Comparator.comparingInt(sortedParagraph -> sortedParagraph.getChildren().size());
+        sortedParagraphs.sort(comparator);
+        return new Composite(sortedParagraphs);
     }
 
     public Component sortWordsInAllSentences(Component text) {
@@ -73,17 +67,17 @@ public class TextProcessor {
         for (Component paragraph : text.getChildren()) {
             List<Component> sentences = new ArrayList<>();
             for (Component sentence : paragraph.getChildren()) {
-                List<Component> lexemes = sentence.getChildren();
-                sortLexemes(lexemes);
-                sentences.add(new Composite(lexemes));
+                List<Component> sortedLexemes = new ArrayList<>(sentence.getChildren());
+                sortLexemes(sortedLexemes);
+                sentences.add(new Composite(sortedLexemes));
             }
             paragraphs.add(new Composite(sentences));
         }
         return new Composite(paragraphs);
     }
 
-    private void sortLexemes(List<Component> lexemes) {
-        lexemes.sort(Comparator.comparingInt(lexeme -> {
+    private void sortLexemes(List<Component> sortedLexemes) {
+        sortedLexemes.sort(Comparator.comparingInt(lexeme -> {
             String lexemeValue = ((Leaf) lexeme).getValue();
             return lexemeValue.length();
         }));

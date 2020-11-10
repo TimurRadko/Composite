@@ -3,7 +3,7 @@ package com.epam.information.handling.data.parser;
 import java.util.regex.Pattern;
 
 public class TextParser extends AbstractParser {
-    private static final String PATTERN_PARAGRAPH = "(\\p{Alpha}+\\p{Punct}* .*)|(\\p{Alpha}+.)";
+    private static final String PATTERN_PARAGRAPH = "(\\p{Graph}* .*)|(\\p{Graph}*.)";
 
     public TextParser(Parser successor) {
         super(successor);
