@@ -1,7 +1,5 @@
 package com.epam.information.handling.logic.expression;
 
-import com.epam.information.handling.logic.Context;
-
 public class TerminalExpressionMinus implements MathExpression {
 
     @Override

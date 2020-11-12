@@ -1,10 +1,10 @@
-package com.epam.information.handler.logic;
+package com.epam.information.handler.logic.expression;
 
-import com.epam.information.handling.logic.Calculator;
+import com.epam.information.handling.logic.expression.ExpressionCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CalculatorTest {
+public class ExpressionCalculatorTest {
     private static final String MULTIPLY = "2_5_* ";
     private static final String PLUS = "2_5_+ ";
     private static final String MINUS = "10_5_- ";
@@ -12,29 +12,29 @@ public class CalculatorTest {
 
     @Test
     public void testCalculateShouldReturnCorrectAnswerWhenUsingMultiply() {
-        Calculator calculator = new Calculator();
-        int result = calculator.calculate(MULTIPLY);
+        ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+        int result = expressionCalculator.calculate(MULTIPLY);
         Assert.assertEquals(10, result);
     }
 
     @Test
     public void testCalculateShouldReturnCorrectAnswerWhenUsingPlus() {
-        Calculator calculator = new Calculator();
-        int result = calculator.calculate(PLUS);
+        ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+        int result = expressionCalculator.calculate(PLUS);
         Assert.assertEquals(7, result);
     }
 
     @Test
     public void testCalculateShouldReturnCorrectAnswerWhenUsingMinus() {
-        Calculator calculator = new Calculator();
-        int result = calculator.calculate(MINUS);
+        ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+        int result = expressionCalculator.calculate(MINUS);
         Assert.assertEquals(5, result);
     }
 
     @Test
     public void testCalculateShouldReturnCorrectAnswerWhenUsingDivide() {
-        Calculator calculator = new Calculator();
-        int result = calculator.calculate(DIVIDE);
+        ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+        int result = expressionCalculator.calculate(DIVIDE);
         Assert.assertEquals(2, result);
     }
 }

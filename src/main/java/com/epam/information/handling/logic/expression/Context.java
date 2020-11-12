@@ -1,9 +1,10 @@
-package com.epam.information.handling.logic;
+package com.epam.information.handling.logic.expression;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Context {
+/*private-package*/
+class Context {
     private final Deque<Integer> contextValues = new ArrayDeque<>();
 
     public Integer popValue() {

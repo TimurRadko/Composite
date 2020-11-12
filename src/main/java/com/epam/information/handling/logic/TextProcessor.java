@@ -4,6 +4,7 @@ import com.epam.information.handling.data.component.Component;
 import com.epam.information.handling.data.component.Composite;
 import com.epam.information.handling.data.component.Leaf;
 import com.epam.information.handling.data.component.LeafType;
+import com.epam.information.handling.logic.expression.ExpressionCalculator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,6 +13,7 @@ import java.util.List;
 public class TextProcessor {
     private static final String PARAGRAPH_SEPARATOR = System.lineSeparator();
     private static final String EXPRESSION_SEPARATOR = " ";
+    private final ExpressionCalculator expressionCalculator = new ExpressionCalculator();
 
     public Component calculateMathExpression(Component component) {
         List<Component> children = component.getChildren();
@@ -34,8 +36,7 @@ public class TextProcessor {
             return leaf;
         }
         String value = leaf.getValue();
-        Calculator calculator = new Calculator();
-        int result = calculator.calculate(value);
+        int result = expressionCalculator.calculate(value);
         String stringResult = Integer.toString(result);
         return Leaf.createWord(stringResult + EXPRESSION_SEPARATOR);
     }

@@ -1,6 +1,5 @@
 package com.epam.information.handling.data.reader;
 
-import com.epam.information.handling.data.reader.DataReader;
 import com.epam.information.handling.exception.DataException;
 
 import java.io.IOException;
@@ -18,7 +17,9 @@ public class FileDataReader implements DataReader {
         StringBuilder resultBuilder = new StringBuilder();
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            lines.forEach(line -> resultBuilder.append(line).append('\n'));
+            for (String line : lines) {
+                resultBuilder.append(line).append('\n');
+            }
         } catch (IOException e) {
             throw new DataException("Exception. Cause: ", e);
         }

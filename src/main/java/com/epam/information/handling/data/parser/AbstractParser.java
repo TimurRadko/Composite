@@ -16,20 +16,21 @@ public abstract class AbstractParser implements Parser {
     }
 
     public Component parse(String text) {
-        Pattern pattern = getPattern();
+        String patternString = getPattern();
+        Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(text);
         List<Component> children = new ArrayList<>();
         while (matcher.find()) {
             String value = matcher.group();
-            addChild(children, value);
+            process(children, value);
         }
         return new Composite(children);
     }
 
-    protected void addChild(List<Component> children, String value) {
+    protected void process(List<Component> children, String value) {
         Component child = successor.parse(value);
         children.add(child);
     }
 
-    protected abstract Pattern getPattern();
+    protected abstract String getPattern();
 }

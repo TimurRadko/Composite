@@ -1,7 +1,5 @@
 package com.epam.information.handling.data.parser;
 
-import java.util.regex.Pattern;
-
 public class ParagraphParser extends AbstractParser {
     private static final String PATTERN_SENTENCE = "[A-Z].*?[.!?](.|)";
 
@@ -10,7 +8,7 @@ public class ParagraphParser extends AbstractParser {
     }
 
     @Override
-    protected Pattern getPattern() {
-        return Pattern.compile(PATTERN_SENTENCE);
+    protected String getPattern() {
+        return PATTERN_SENTENCE;
     }
 }

@@ -4,7 +4,6 @@ import com.epam.information.handling.data.component.Component;
 import com.epam.information.handling.data.component.Leaf;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
     private static final String WORD = "(\\p{Graph}+ )|(\\p{Alnum}+[.!?])";
@@ -15,8 +14,8 @@ public class SentenceParser extends AbstractParser {
     }
 
     @Override
-    protected void addChild(List<Component> children, String value) {
-        if (value.matches(EXPRESSION)) {
+    protected void process(List<Component> children, String value) {
+        if (EXPRESSION.matches(value)) {
             Leaf expression = Leaf.createExpression(value);
             children.add(expression);
         } else {
@@ -26,7 +25,7 @@ public class SentenceParser extends AbstractParser {
     }
 
     @Override
-    protected Pattern getPattern() {
-        return Pattern.compile(WORD);
+    protected String getPattern() {
+        return WORD;
     }
 }

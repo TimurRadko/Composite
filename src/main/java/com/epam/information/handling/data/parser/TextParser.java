@@ -1,7 +1,5 @@
 package com.epam.information.handling.data.parser;
 
-import java.util.regex.Pattern;
-
 public class TextParser extends AbstractParser {
     private static final String PATTERN_PARAGRAPH = "(\\p{Graph}* .*)|(\\p{Graph}*.)";
 
@@ -10,7 +8,7 @@ public class TextParser extends AbstractParser {
     }
 
     @Override
-    protected Pattern getPattern() {
-        return Pattern.compile(PATTERN_PARAGRAPH);
+    protected String getPattern() {
+        return PATTERN_PARAGRAPH;
     }
 }

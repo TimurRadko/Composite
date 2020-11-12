@@ -1,12 +1,10 @@
-package com.epam.information.handling.logic;
-
-import com.epam.information.handling.logic.expression.*;
+package com.epam.information.handling.logic.expression;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Calculator {
+public class ExpressionCalculator {
 
     public int calculate(String expression) {
         String preparedExpression = expression.trim();
