@@ -22,7 +22,7 @@ public class TextProcessorTest {
         Component actualComponent = TextProcessorHelper.getUnsortedTextForParagraphSorting();
         Component actualSortedComponent =
                 processor.sortParagraphsBySentenceLength(actualComponent);
-        Component expectedSortedText = TextProcessorHelper.getSortedBySentenceLengthText();
+        Component expectedSortedText = TextProcessorHelper.getSortedTextForParagraphSorting();
         Assert.assertEquals(expectedSortedText, actualSortedComponent);
     }
 

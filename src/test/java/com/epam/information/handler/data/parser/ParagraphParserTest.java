@@ -28,5 +28,4 @@ public class ParagraphParserTest {
         Component actualComponent = paragraphParser.parse(VALID_TEXT);
         Assert.assertEquals(EXPECTED_COMPONENT, actualComponent);
     }
-
 }

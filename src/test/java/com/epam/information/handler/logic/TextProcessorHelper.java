@@ -31,7 +31,7 @@ public class TextProcessorHelper {
         return new Composite(Arrays.asList(sortedParagraph, sortedParagraph));
     }
 
-    public static Component getSortedBySentenceLengthText() {
+    public static Component getSortedTextForParagraphSorting() {
         Component sentence = new Composite(Arrays.asList(THIRD_LEAF, SECOND_LEAF, FIRST_LEAF));
         Component twoParagraphs = new Composite(Arrays.asList(sentence, sentence));
         Component threeParagraphs = new Composite(Arrays.asList(sentence, sentence, sentence));
